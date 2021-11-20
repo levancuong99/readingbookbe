@@ -8,8 +8,10 @@ import k17.example.readingbook.security.ProvideJwt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 @Service
 public class UserServiceImpl implements UserService{
+
     @Autowired
     private ProvideJwt jwtProvider;
 
@@ -18,9 +20,18 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public LoginDto login(ParamsLogin params) {
+        System.out.println("hello12");
         User user = userRepository.findByEmail(params.getEmail());
+        System.out.println("hello");
+        System.out.println(user);
         LoginDto loginDto =new LoginDto();
         loginDto.setToken(jwtProvider.generateTokenForUser(user));
         return loginDto;
+    }
+
+    @Override
+    public String getInfo() {
+        System.out.println("abc");
+        return "hello";
     }
 }
