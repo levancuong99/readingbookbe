@@ -1,7 +1,6 @@
 package k17.example.readingbook.controller;
 
 
-import k17.example.readingbook.entity.Book;
 import k17.example.readingbook.model.dto.BookDto;
 import k17.example.readingbook.model.request.*;
 import k17.example.readingbook.service.BookService;

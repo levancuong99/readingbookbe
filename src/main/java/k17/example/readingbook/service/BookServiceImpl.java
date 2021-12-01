@@ -61,6 +61,7 @@ public class BookServiceImpl implements  BookService{
         for(Category cate :categories) {
             if(newBook.getCateId()== cate.getCateId()) {
                 bookDto = BookMapper.toBookAndCategory(newBook,cate);
+                bookRepository.save(newBook);
                 break;
             }
         }
