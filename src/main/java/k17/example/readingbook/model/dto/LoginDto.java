@@ -9,4 +9,6 @@ import lombok.*;
 @ToString
 public class LoginDto {
     private String token;
+    private int userId;
+    private int roleId;
 }

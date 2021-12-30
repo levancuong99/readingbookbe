@@ -49,25 +49,25 @@ public class UserController
         return ResponseEntity.ok("delete success");
     }
 
-    @PutMapping("/users/{id}")
+    @PutMapping("/user/{id}")
     public ResponseEntity<?> updateUserByAdmin(@Validated @RequestBody ParamAdminUpdateUser req, @PathVariable int id) {
         UserDto account = userService.updateUserByAdmin(req, id);
         return ResponseEntity.ok(account);
     }
-    @PutMapping("/user/{id}")
+    @PutMapping("/users/{id}")
     public ResponseEntity<?> updateUserByUser(@Validated @RequestBody ParamUserUpdateUser req, @PathVariable int id) {
         UserDto account = userService.updateUserByUser(req, id);
         return ResponseEntity.ok(account);
     }
 
-    @PostMapping("/create")
+    @PostMapping("users/create")
     public ResponseEntity<?> createUser(@Validated @RequestBody ParamCreateUser req) {
         UserDto user = userService.createUser(req);
         return ResponseEntity.ok(user);
     }
 
 
-    @PostMapping("/register")
+    @PostMapping("users/register")
     public ResponseEntity<?> register(@Validated @RequestBody ParamCreateUser req) {
         UserDto user = userService.register(req);
         return ResponseEntity.ok(user);

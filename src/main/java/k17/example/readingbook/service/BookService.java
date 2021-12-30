@@ -2,6 +2,7 @@ package k17.example.readingbook.service;
 
 import k17.example.readingbook.entity.Book;
 import k17.example.readingbook.model.dto.BookDto;
+import k17.example.readingbook.model.dto.BookPagingDto;
 import k17.example.readingbook.model.request.ParamsCreateBook;
 import k17.example.readingbook.model.request.ParamsUpdateBook;
 import org.springframework.stereotype.Service;
@@ -16,4 +17,6 @@ public interface BookService {
     BookDto createBook(ParamsCreateBook param);
     void deleteBookById(int id);
     void increaseView(int id);
+    BookPagingDto getAllBookPaging(int id);
+    BookPagingDto getAllBookBestViewerPaging(int id);
 }

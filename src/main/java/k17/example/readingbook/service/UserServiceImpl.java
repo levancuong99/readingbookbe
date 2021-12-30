@@ -33,6 +33,8 @@ public class UserServiceImpl implements UserService{
         User user = userRepository.findByEmail(params.getEmail());
         LoginDto loginDto =new LoginDto();
         loginDto.setToken(jwtProvider.generateTokenForUser(user));
+        loginDto.setUserId(user.getUserId());
+        loginDto.setRoleId(user.getRoleId());
         return loginDto;
     }
 
@@ -97,6 +99,7 @@ public class UserServiceImpl implements UserService{
 //        }
         user.setFullName(req.getFullName());
         user.setAddress(req.getAddress());
+
 //        user.setUpdatedAt(now);
         userRepository.save(user);
         return UserMapper.toUserDto(user);

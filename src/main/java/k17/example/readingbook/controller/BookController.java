@@ -1,7 +1,6 @@
 package k17.example.readingbook.controller;
-
-
 import k17.example.readingbook.model.dto.BookDto;
+import k17.example.readingbook.model.dto.BookPagingDto;
 import k17.example.readingbook.model.request.*;
 import k17.example.readingbook.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +30,16 @@ public class BookController
         BookDto book =  bookService.getBookById(id);
         return ResponseEntity.ok(book);
     }
-
+    @GetMapping(value="books/paging/{pageNumber}")
+    public ResponseEntity<?> getListBookPaging(@PathVariable int pageNumber) {
+        BookPagingDto bookPagingDto = bookService.getAllBookPaging(pageNumber);
+        return ResponseEntity.ok(bookPagingDto);
+    }
+    @GetMapping(value="books/bestviewer/paging/{pageNumber}")
+    public ResponseEntity<?> getListBookBestViewerPaging(@PathVariable int pageNumber) {
+        BookPagingDto bookPagingDto = bookService.getAllBookBestViewerPaging(pageNumber);
+        return ResponseEntity.ok(bookPagingDto);
+    }
     @DeleteMapping("books/{id}")
     public ResponseEntity<?> deleteBook(@PathVariable int id) {
         bookService.deleteBookById(id);

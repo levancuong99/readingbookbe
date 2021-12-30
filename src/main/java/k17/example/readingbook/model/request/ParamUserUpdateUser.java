@@ -12,4 +12,5 @@ import lombok.Setter;
 public class ParamUserUpdateUser {
     private String fullName;
     private String address;
+
 }
