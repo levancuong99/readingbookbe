@@ -4,6 +4,7 @@ package k17.example.readingbook.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -23,4 +24,6 @@ public class Post {
     private String content;
     @Column(name = "img_post")
     private String imgPost;
+    @Column(name = "created_at")
+    private Date createdAt;
 }

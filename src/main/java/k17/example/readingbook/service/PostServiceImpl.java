@@ -7,6 +7,7 @@ import k17.example.readingbook.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 @Service
 public class PostServiceImpl implements PostService{
@@ -39,6 +40,7 @@ public class PostServiceImpl implements PostService{
         post.setTitle(p.getTitle());
         post.setContent(p.getContent());
         post.setImgPost(p.getImgPost());
+        post.setCreatedAt(new Date());
         postRepository.save(post);
         return post;
     }
@@ -46,6 +48,7 @@ public class PostServiceImpl implements PostService{
     @Override
     public Post createPost(ParamUpdatePost param) {
         Post post=PostMapper.toParamUpdatePost(param);
+        post.setCreatedAt(new Date());
         postRepository.save(post);
         return post;
     }
