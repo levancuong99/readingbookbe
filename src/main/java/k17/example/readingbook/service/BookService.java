@@ -12,6 +12,7 @@ import java.util.List;
 @Service
 public interface BookService {
     BookDto getBookById(int id);
+    BookPagingDto getAllBookSearch(int cateId,String string,int pageNumber);
     List<BookDto> getAllBook();
     BookDto updateBookById(ParamsUpdateBook param,int id);
     BookDto createBook(ParamsCreateBook param);

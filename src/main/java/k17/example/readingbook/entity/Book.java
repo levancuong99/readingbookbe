@@ -3,6 +3,7 @@ package k17.example.readingbook.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -27,10 +28,14 @@ public class Book {
     private String linkBook;
     @Column(name = "number_view")
     private Integer numberView;
+    @Column(name = "number_like")
+    private Integer numberLike;
     @Column(name = "author_name")
     private String authorName;
     @Column(name = "profile_author")
     private String authorProfile;
+    @Column(name = "created_at")
+    private Date createdAt;
 
     @Column(name = "cate_id")
     private Integer cateId;

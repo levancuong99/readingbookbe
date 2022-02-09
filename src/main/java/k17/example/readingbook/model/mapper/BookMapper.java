@@ -5,6 +5,9 @@ import k17.example.readingbook.model.dto.BookDto;
 import k17.example.readingbook.model.request.ParamsCreateBook;
 import k17.example.readingbook.model.request.ParamsUpdateBook;
 
+import java.util.Calendar;
+import java.util.Date;
+
 public class BookMapper {
     public static BookDto toBookAndCategory (Book b, Category c) {
         BookDto bookDto = new BookDto();
@@ -14,9 +17,11 @@ public class BookMapper {
         bookDto.setImgBook(b.getImgBook());
         bookDto.setLinkBook(b.getLinkBook());
         bookDto.setNumberView(b.getNumberView());
+        bookDto.setNumberLike(b.getNumberLike());
         bookDto.setAuthorName(b.getAuthorName());
         bookDto.setAuthorProfile(b.getAuthorProfile());
         bookDto.setCateName(c.getCateName());
+        bookDto.setCreatedAt(b.getCreatedAt());
         return bookDto;
     }
     public static Book toBook (ParamsUpdateBook b) {
@@ -43,6 +48,7 @@ public class BookMapper {
         book.setAuthorName(b.getAuthorName());
         book.setAuthorProfile(b.getAuthorProfile());
         book.setCateId(b.getCateId());
+        book.setCreatedAt(new Date());
         return book;
     }
 

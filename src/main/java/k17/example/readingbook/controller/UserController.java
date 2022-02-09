@@ -14,7 +14,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
-
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("/api/")
@@ -65,7 +64,6 @@ public class UserController
         UserDto user = userService.createUser(req);
         return ResponseEntity.ok(user);
     }
-
 
     @PostMapping("users/register")
     public ResponseEntity<?> register(@Validated @RequestBody ParamCreateUser req) {

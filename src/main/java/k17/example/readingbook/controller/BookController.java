@@ -25,6 +25,12 @@ public class BookController
         return ResponseEntity.ok(books);
     }
 
+    @GetMapping(value="/books/search/{cateId}/{string}/{pageNumber}")
+    public ResponseEntity<?> getListBooksByCate(@PathVariable int cateId,@PathVariable String string,@PathVariable int pageNumber) {
+        BookPagingDto books = bookService.getAllBookSearch(cateId,string,pageNumber);
+        return ResponseEntity.ok(books);
+    }
+
     @GetMapping(value="books/{id}")
     public ResponseEntity<?> getBookById(@PathVariable int id) {
         BookDto book =  bookService.getBookById(id);

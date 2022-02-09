@@ -2,6 +2,8 @@ package k17.example.readingbook.model.dto;
 
 import lombok.*;
 
+import java.util.Date;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -14,7 +16,9 @@ public class BookDto {
     private String imgBook;
     private String linkBook;
     private Integer numberView;
+    private Integer numberLike;
     private String authorName;
     private String authorProfile;
     private String cateName;
+    private Date createdAt;
 }
