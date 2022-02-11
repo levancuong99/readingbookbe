@@ -15,6 +15,8 @@ public interface UserService {
     LoginDto login(ParamsLogin params);
     List<UserDto> getAllUser();
     UserDto getUserById(int id);
+    UserDto updateAvtUserById(String avt,int id);
+    UserDto getInfoUserFromToken(String token);
     void deleteUserById(int id);
     UserDto updateUserByAdmin(ParamAdminUpdateUser req, int id);
     UserDto updateUserByUser(ParamUserUpdateUser req, int id);

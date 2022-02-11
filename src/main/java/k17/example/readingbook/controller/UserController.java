@@ -28,6 +28,10 @@ public class UserController
         return userService.login(params);
     }
 
+    @PostMapping(value = "/user/token")
+    public UserDto getInfoUserFromToken(@Validated @RequestBody String token) {
+        return userService.getInfoUserFromToken(token);
+    }
 
     @GetMapping(value="/users")
     public ResponseEntity<?> getListUsers() {
@@ -51,6 +55,12 @@ public class UserController
     @PutMapping("/user/{id}")
     public ResponseEntity<?> updateUserByAdmin(@Validated @RequestBody ParamAdminUpdateUser req, @PathVariable int id) {
         UserDto account = userService.updateUserByAdmin(req, id);
+        return ResponseEntity.ok(account);
+    }
+
+    @PutMapping("/user/avt/{id}")
+    public ResponseEntity<?> updateAvtById(@Validated @RequestBody String avt, @PathVariable int id) {
+        UserDto account = userService.updateAvtUserById(avt, id);
         return ResponseEntity.ok(account);
     }
     @PutMapping("/users/{id}")

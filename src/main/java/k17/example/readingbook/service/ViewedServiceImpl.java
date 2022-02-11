@@ -83,4 +83,12 @@ public class ViewedServiceImpl implements  ViewedService{
         bookPagingDto.setNumberRowCurrentpage(books1.size());
         return bookPagingDto;
     }
+
+    @Override
+    public void addViewed(int idUser, int idBook) {
+        Viewed v=new Viewed();
+        v.setUserId(idUser);
+        v.setBookId(idBook);
+        viewedRepository.save(v);
+    }
 }

@@ -86,5 +86,13 @@ public class LikedServiceImpl implements  LikedService{
         return bookPagingDto;
     }
 
+    @Override
+    public void addLiked(int userId, int bookId) {
+        Liked l=new Liked();
+        l.setUserId(userId);
+        l.setBookId(bookId);
+        likedRepository.save(l);
+    }
+
 
 }

@@ -18,6 +18,8 @@ public interface BookService {
     BookDto createBook(ParamsCreateBook param);
     void deleteBookById(int id);
     void increaseView(int id);
+    void increaseLike(int id);
     BookPagingDto getAllBookPaging(int id);
     BookPagingDto getAllBookBestViewerPaging(int id);
+    BookPagingDto getAllBookBestLikerPaging(int id);
 }

@@ -23,4 +23,11 @@ public class ViewedController
     }
 
 
+    @PostMapping(value="/books/viewed/create/{idUser}/{bookId}")
+    public ResponseEntity<?> addViewed(@PathVariable int idUser,@PathVariable int bookId) {
+         viewedService.addViewed(idUser,bookId);
+        return ResponseEntity.ok("success");
+    }
+
+
 }

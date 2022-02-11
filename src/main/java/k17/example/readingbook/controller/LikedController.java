@@ -21,6 +21,11 @@ public class LikedController
         BookPagingDto bookPagingDto = likedService.getAllBookLikedByUser(idUser,pageNumber);
         return ResponseEntity.ok(bookPagingDto);
     }
+    @PostMapping(value="/books/liked/create/{idUser}/{bookId}")
+    public ResponseEntity<?> addLiked(@PathVariable int idUser,@PathVariable int bookId) {
+        likedService.addLiked(idUser,bookId);
+        return ResponseEntity.ok("success");
+    }
 
 
 }

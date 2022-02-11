@@ -6,4 +6,5 @@ import org.springframework.stereotype.Service;
 @Service
 public interface ViewedService {
     BookPagingDto getAllBookViewedByUser(int userId,int pageNumber);
+    void addViewed(int idUser,int idBook);
 }

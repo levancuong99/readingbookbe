@@ -46,6 +46,11 @@ public class BookController
         BookPagingDto bookPagingDto = bookService.getAllBookBestViewerPaging(pageNumber);
         return ResponseEntity.ok(bookPagingDto);
     }
+    @GetMapping(value="books/bestliker/paging/{pageNumber}")
+    public ResponseEntity<?> getListBookBestLikerPaging(@PathVariable int pageNumber) {
+        BookPagingDto bookPagingDto = bookService.getAllBookBestLikerPaging(pageNumber);
+        return ResponseEntity.ok(bookPagingDto);
+    }
     @DeleteMapping("books/{id}")
     public ResponseEntity<?> deleteBook(@PathVariable int id) {
         bookService.deleteBookById(id);
@@ -68,6 +73,11 @@ public class BookController
     public ResponseEntity<?> increaseView(@PathVariable int id) {
         bookService.increaseView(id);
         return ResponseEntity.ok("increase view success");
+    }
+    @PutMapping ("books/increaselike/{id}")
+    public ResponseEntity<?> increaseLike(@PathVariable int id) {
+        bookService.increaseLike(id);
+        return ResponseEntity.ok("increase like success");
     }
 
 

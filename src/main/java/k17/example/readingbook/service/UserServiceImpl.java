@@ -39,6 +39,8 @@ public class UserServiceImpl implements UserService{
     }
 
 
+
+
     @Override
     public List<UserDto> getAllUser() {
         List<UserDto> userDtos = new ArrayList<>();
@@ -58,6 +60,8 @@ public class UserServiceImpl implements UserService{
         return userDtos;
     }
 
+
+
     @Override
     public UserDto getUserById(int id) {
         User user = userRepository.findByUserId(id);
@@ -66,6 +70,25 @@ public class UserServiceImpl implements UserService{
 //        }
         return UserMapper.toUserDto(user);
     }
+
+    @Override
+    public UserDto updateAvtUserById(String avt, int id) {
+        User user = userRepository.findByUserId(id);
+        user.setImg_avt(avt);
+//        if (user == null || user.getIsDelete()) {
+//            throw new NotFoundException(MessageError.NOT_FOUND_USER);
+//        }
+        return UserMapper.toUserDto(user);
+    }
+
+    @Override
+    public UserDto getInfoUserFromToken(String token) {
+//        if (jwtProvider.validateToken(token) == null) {
+//            throw new UnauthorizedException();
+//        }
+        return getUserById(jwtProvider.getUserIdFromJWT(token));
+    }
+
 
     @Override
     public void deleteUserById(int id) {
@@ -136,6 +159,4 @@ public class UserServiceImpl implements UserService{
         userRepository.save(user);
         return UserMapper.toUserDto(user);
     }
-
-
 }

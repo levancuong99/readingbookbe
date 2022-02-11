@@ -101,6 +101,13 @@ public class BookServiceImpl implements  BookService{
     }
 
     @Override
+    public void increaseLike(int id) {
+        Book book=bookRepository.findByBookId(id);
+        book.setNumberLike(book.getNumberLike()+1);
+        bookRepository.save(book);
+    }
+
+    @Override
     public BookPagingDto getAllBookPaging(int pageNumber) {
         List<Book> books=bookRepository.findAllBy();
         List<Category> categories=categoryRepository.findAllBy();
@@ -140,6 +147,43 @@ public class BookServiceImpl implements  BookService{
     public BookPagingDto getAllBookBestViewerPaging(int pageNumber) {
         List<Book> books=bookRepository.findAllBy();
         Collections.sort(books, Comparator.comparingInt(Book::getNumberView));
+        List<Category> categories=categoryRepository.findAllBy();
+        List<BookDto> bookDtos=new ArrayList<>();
+        for(Book book : books) {
+            int id=book.getCateId();
+            for(Category cate :categories) {
+                if(id== cate.getCateId()) {
+                    bookDtos.add(BookMapper.toBookAndCategory(book,cate));
+                }
+            }
+        }
+        int numberAllRow=books.size();
+        int totalPage=numberAllRow/numberRowPerPage+1;
+        BookPagingDto bookPagingDto=new BookPagingDto();
+        bookPagingDto.setCurrentPage(pageNumber);
+        bookPagingDto.setTotalPage(totalPage);
+        bookPagingDto.setAllRow(numberAllRow);
+        int endIndex=0;
+        int startIndex=(pageNumber-1)*numberRowPerPage;
+        if(startIndex+numberRowPerPage<=numberAllRow) {
+            endIndex=startIndex+numberRowPerPage;
+        }else {
+            endIndex=numberAllRow;
+        }
+
+        List<BookDto> books1=new ArrayList<>();
+        for(int i=startIndex; i<endIndex;i++) {
+            books1.add(bookDtos.get(i));
+        }
+        bookPagingDto.setBooks(books1);
+        bookPagingDto.setNumberRowCurrentpage(books1.size());
+        return bookPagingDto;
+    }
+
+    @Override
+    public BookPagingDto getAllBookBestLikerPaging(int pageNumber) {
+        List<Book> books=bookRepository.findAllBy();
+        Collections.sort(books, Comparator.comparingInt(Book::getNumberLike));
         List<Category> categories=categoryRepository.findAllBy();
         List<BookDto> bookDtos=new ArrayList<>();
         for(Book book : books) {
