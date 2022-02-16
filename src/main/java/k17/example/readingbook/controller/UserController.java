@@ -3,10 +3,7 @@ package k17.example.readingbook.controller;
 
 import k17.example.readingbook.model.dto.LoginDto;
 import k17.example.readingbook.model.dto.UserDto;
-import k17.example.readingbook.model.request.ParamAdminUpdateUser;
-import k17.example.readingbook.model.request.ParamCreateUser;
-import k17.example.readingbook.model.request.ParamUserUpdateUser;
-import k17.example.readingbook.model.request.ParamsLogin;
+import k17.example.readingbook.model.request.*;
 import k17.example.readingbook.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -59,7 +56,7 @@ public class UserController
     }
 
     @PutMapping("/user/avt/{id}")
-    public ResponseEntity<?> updateAvtById(@Validated @RequestBody String avt, @PathVariable int id) {
+    public ResponseEntity<?> updateAvtById(@Validated @RequestBody ParamsUpdateAvt avt, @PathVariable int id) {
         UserDto account = userService.updateAvtUserById(avt, id);
         return ResponseEntity.ok(account);
     }

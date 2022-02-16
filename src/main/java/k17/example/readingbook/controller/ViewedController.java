@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-
-
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("/api")
@@ -21,8 +19,6 @@ public class ViewedController
         BookPagingDto bookPagingDto = viewedService.getAllBookViewedByUser(idUser,pageNumber);
         return ResponseEntity.ok(bookPagingDto);
     }
-
-
     @PostMapping(value="/books/viewed/create/{idUser}/{bookId}")
     public ResponseEntity<?> addViewed(@PathVariable int idUser,@PathVariable int bookId) {
          viewedService.addViewed(idUser,bookId);

@@ -20,5 +20,6 @@ public class BookDto {
     private String authorName;
     private String authorProfile;
     private String cateName;
+    private Integer cateId;
     private Date createdAt;
 }

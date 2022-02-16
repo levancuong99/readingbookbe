@@ -29,7 +29,7 @@ public class LikedServiceImpl implements  LikedService{
     @Autowired
     private LikedRepository likedRepository;
 
-
+    int numberRowPerPage=3;
     @Override
     public BookPagingDto getAllBookLikedByUser(int userId, int pageNumber) {
         List<Liked> likedList=likedRepository.findAllBy();
@@ -62,7 +62,7 @@ public class LikedServiceImpl implements  LikedService{
             }
         }
 
-        int numberRowPerPage=5;
+
         int numberAllRow=bookList.size();
         int totalPage=numberAllRow/numberRowPerPage+1;
         BookPagingDto bookPagingDto=new BookPagingDto();
@@ -70,9 +70,9 @@ public class LikedServiceImpl implements  LikedService{
         bookPagingDto.setTotalPage(totalPage);
         bookPagingDto.setAllRow(numberAllRow);
         int endIndex=0;
-        int startIndex=(pageNumber-1)*5;
-        if(startIndex+5<=numberAllRow) {
-            endIndex=startIndex+5;
+        int startIndex=(pageNumber-1)*numberRowPerPage;
+        if(startIndex+numberRowPerPage<=numberAllRow) {
+            endIndex=startIndex+numberRowPerPage;
         }else {
             endIndex=numberAllRow;
         }
@@ -92,6 +92,17 @@ public class LikedServiceImpl implements  LikedService{
         l.setUserId(userId);
         l.setBookId(bookId);
         likedRepository.save(l);
+    }
+
+    @Override
+    public Boolean isLikedByUser(int userId, int bookId) {
+        List<Liked> likedList=likedRepository.findAllBy();
+        for(Liked l : likedList) {
+            if(l.getUserId()==userId && l.getBookId()==bookId) {
+                return true;
+            }
+        }
+        return false;
     }
 
 

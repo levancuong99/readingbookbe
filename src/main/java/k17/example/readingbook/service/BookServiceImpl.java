@@ -2,6 +2,7 @@ package k17.example.readingbook.service;
 
 import k17.example.readingbook.entity.Book;
 import k17.example.readingbook.entity.Category;
+import k17.example.readingbook.entity.Post;
 import k17.example.readingbook.model.dto.BookDto;
 import k17.example.readingbook.model.dto.BookPagingDto;
 import k17.example.readingbook.model.mapper.BookMapper;
@@ -57,8 +58,15 @@ public class BookServiceImpl implements  BookService{
 
     @Override
     public BookDto updateBookById(ParamsUpdateBook param, int id) {
+        Book newBook=bookRepository.findByBookId(id);
         BookDto bookDto=new BookDto();
-        Book newBook=BookMapper.toBook(param);
+        newBook.setBookName(param.getBookName());
+        newBook.setDescription(param.getDescription());
+        newBook.setImgBook(param.getImgBook());
+        newBook.setLinkBook(param.getLinkBook());
+        newBook.setAuthorName(param.getAuthorName());
+        newBook.setAuthorProfile(param.getAuthorProfile());
+        newBook.setCateId(param.getCateId());
         List<Category> categories=categoryRepository.findAllBy();
         for(Category cate :categories) {
             if(newBook.getCateId()== cate.getCateId()) {
@@ -146,7 +154,7 @@ public class BookServiceImpl implements  BookService{
     @Override
     public BookPagingDto getAllBookBestViewerPaging(int pageNumber) {
         List<Book> books=bookRepository.findAllBy();
-        Collections.sort(books, Comparator.comparingInt(Book::getNumberView));
+        Collections.sort(books, Comparator.comparingInt(Book::getNumberView).reversed());
         List<Category> categories=categoryRepository.findAllBy();
         List<BookDto> bookDtos=new ArrayList<>();
         for(Book book : books) {
@@ -183,7 +191,7 @@ public class BookServiceImpl implements  BookService{
     @Override
     public BookPagingDto getAllBookBestLikerPaging(int pageNumber) {
         List<Book> books=bookRepository.findAllBy();
-        Collections.sort(books, Comparator.comparingInt(Book::getNumberLike));
+        Collections.sort(books, Comparator.comparingInt(Book::getNumberLike).reversed());
         List<Category> categories=categoryRepository.findAllBy();
         List<BookDto> bookDtos=new ArrayList<>();
         for(Book book : books) {
@@ -220,15 +228,29 @@ public class BookServiceImpl implements  BookService{
 
     @Override
     public BookPagingDto getAllBookSearch(int cateId,String string, int pageNumber) {
+        if(string.equals("$")) {
+
+            string="";
+            System.out.println("dava:"+string);
+        };
+
         List<Book> books=bookRepository.findAllBy();
-        books=books.stream().filter(b -> b.getBookName().toLowerCase().contains(string.toLowerCase()) || b.getAuthorName().toLowerCase().contains(string.toLowerCase())).collect(Collectors.toList());
+        String finalString = string;
+        System.out.println(finalString);
+        books=books.stream().filter(b -> b.getBookName().toLowerCase().contains(finalString.toLowerCase()) || b.getAuthorName().toLowerCase().contains(finalString.toLowerCase())).collect(Collectors.toList());
         List<Category> categories=categoryRepository.findAllBy();
         List<BookDto> bookDtos=new ArrayList<>();
         for(Book book : books) {
             int id=book.getCateId();
             for(Category cate :categories) {
-                if(id== cate.getCateId() && id== cateId) {
-                    bookDtos.add(BookMapper.toBookAndCategory(book,cate));
+                if(cateId!=0) {
+                    if (id == cate.getCateId() && id == cateId) {
+                        bookDtos.add(BookMapper.toBookAndCategory(book, cate));
+                    }
+                }else {
+                    if (id == cate.getCateId()) {
+                        bookDtos.add(BookMapper.toBookAndCategory(book, cate));
+                    }
                 }
             }
         }

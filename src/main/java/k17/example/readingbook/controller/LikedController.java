@@ -1,5 +1,6 @@
 package k17.example.readingbook.controller;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import k17.example.readingbook.model.dto.BookPagingDto;
 import k17.example.readingbook.service.LikedService;
 import k17.example.readingbook.service.ViewedService;
@@ -25,6 +26,11 @@ public class LikedController
     public ResponseEntity<?> addLiked(@PathVariable int idUser,@PathVariable int bookId) {
         likedService.addLiked(idUser,bookId);
         return ResponseEntity.ok("success");
+    }
+    @GetMapping(value="/books/liked/check/{idUser}/{bookId}")
+    public ResponseEntity<?> isLiked(@PathVariable int idUser,@PathVariable int bookId) {
+        Boolean isLiked = likedService.isLikedByUser(idUser,bookId);
+        return ResponseEntity.ok(isLiked);
     }
 
 

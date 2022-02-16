@@ -7,4 +7,5 @@ import org.springframework.stereotype.Service;
 public interface LikedService {
     BookPagingDto getAllBookLikedByUser(int userId,int pageNumber);
     void addLiked(int userId,int bookId);
+    Boolean isLikedByUser(int userId,int bookId);
 }

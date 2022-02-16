@@ -26,7 +26,7 @@ public class ViewedServiceImpl implements  ViewedService{
 
     @Autowired
     private ViewedRepository viewedRepository;
-
+    int numberRowPerPage=1;
 
     @Override
     public BookPagingDto getAllBookViewedByUser(int userId, int pageNumber) {
@@ -60,7 +60,7 @@ public class ViewedServiceImpl implements  ViewedService{
             }
         }
 
-        int numberRowPerPage=5;
+
         int numberAllRow=bookList.size();
         int totalPage=numberAllRow/numberRowPerPage+1;
         BookPagingDto bookPagingDto=new BookPagingDto();
@@ -68,9 +68,9 @@ public class ViewedServiceImpl implements  ViewedService{
         bookPagingDto.setTotalPage(totalPage);
         bookPagingDto.setAllRow(numberAllRow);
         int endIndex=0;
-        int startIndex=(pageNumber-1)*5;
-        if(startIndex+5<=numberAllRow) {
-            endIndex=startIndex+5;
+        int startIndex=(pageNumber-1)*numberRowPerPage;
+        if(startIndex+1<=numberAllRow) {
+            endIndex=startIndex+numberRowPerPage;
         }else {
             endIndex=numberAllRow;
         }

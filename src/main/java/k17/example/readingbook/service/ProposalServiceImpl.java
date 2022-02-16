@@ -12,7 +12,7 @@ import java.util.List;
 
 @Service
 public class ProposalServiceImpl implements ProposalService{
-
+    int numberRowPerPage=5;
     @Autowired
     private ProposalRepository proposalRepository;
 
@@ -53,7 +53,7 @@ public class ProposalServiceImpl implements ProposalService{
 
     @Override
     public PropPagingDto getAllPropPaging(int pageNumber) {
-        int numberRowPerPage=5;
+
         List<Proposal> proposalList=proposalRepository.findAllBy();
         int numberAllRow=proposalList.size();
         int totalPage=numberAllRow/numberRowPerPage+1;
@@ -63,9 +63,9 @@ public class ProposalServiceImpl implements ProposalService{
         propPagingDto.setAllRow(numberAllRow);
 
         int endIndex=0;
-        int startIndex=(pageNumber-1)*5;
-        if(startIndex+5<=numberAllRow) {
-            endIndex=startIndex+5;
+        int startIndex=(pageNumber-1)*numberRowPerPage;
+        if(startIndex+numberRowPerPage<=numberAllRow) {
+            endIndex=startIndex+numberRowPerPage;
         }else {
             endIndex=numberAllRow;
         }

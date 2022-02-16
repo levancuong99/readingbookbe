@@ -2,6 +2,8 @@ package k17.example.readingbook.controller;
 
 
 import k17.example.readingbook.entity.Post;
+import k17.example.readingbook.model.dto.PostPagingDto;
+import k17.example.readingbook.model.dto.PropPagingDto;
 import k17.example.readingbook.model.request.*;
 import k17.example.readingbook.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,11 @@ public class PostController
     public ResponseEntity<?> getListPost() {
         List<Post> posts = postService.getAllPost();
         return ResponseEntity.ok(posts);
+    }
+    @GetMapping(value="post/paging/{pageNumber}")
+    public ResponseEntity<?> getListPostPaging(@PathVariable int pageNumber) {
+        PostPagingDto  postPagingDto = postService.getAllPostPaging(pageNumber);
+        return ResponseEntity.ok(postPagingDto);
     }
 
     @GetMapping(value="post/{id}")
@@ -50,6 +57,4 @@ public class PostController
         Post post = postService.createPost(req);
         return ResponseEntity.ok(post);
     }
-
-
 }

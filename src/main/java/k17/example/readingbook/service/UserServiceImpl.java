@@ -4,10 +4,7 @@ import k17.example.readingbook.entity.User;
 import k17.example.readingbook.model.dto.LoginDto;
 import k17.example.readingbook.model.dto.UserDto;
 import k17.example.readingbook.model.mapper.UserMapper;
-import k17.example.readingbook.model.request.ParamAdminUpdateUser;
-import k17.example.readingbook.model.request.ParamCreateUser;
-import k17.example.readingbook.model.request.ParamUserUpdateUser;
-import k17.example.readingbook.model.request.ParamsLogin;
+import k17.example.readingbook.model.request.*;
 import k17.example.readingbook.repository.UserRepository;
 import k17.example.readingbook.security.ProvideJwt;
 import k17.example.readingbook.utils.UserUtils;
@@ -72,12 +69,13 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public UserDto updateAvtUserById(String avt, int id) {
+    public UserDto updateAvtUserById(ParamsUpdateAvt avt, int id) {
         User user = userRepository.findByUserId(id);
-        user.setImg_avt(avt);
+        user.setImg_avt(avt.getAvt());
 //        if (user == null || user.getIsDelete()) {
 //            throw new NotFoundException(MessageError.NOT_FOUND_USER);
 //        }
+        userRepository.save(user);
         return UserMapper.toUserDto(user);
     }
 
