@@ -21,7 +21,6 @@ import java.util.List;
 @RequestMapping("/api/")
 public class ProposalController
 {
-
     @Autowired
     private ProposalService proposalService;
 
@@ -60,6 +59,5 @@ public class ProposalController
         Proposal proposal = proposalService.createProp(req);
         return ResponseEntity.ok(proposal);
     }
-
 
 }

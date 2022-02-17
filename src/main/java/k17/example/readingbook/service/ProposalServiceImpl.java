@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -35,8 +36,9 @@ public class ProposalServiceImpl implements ProposalService{
     public Proposal updatePropById(ParamProp param, int id) {
         Proposal proposal=proposalRepository.findByPropId(id);
         proposal.setAuthorName(param.getAuthorName());
-        proposal.setBookName(param.getBookName());
+        proposal.setBookNameProp(param.getBookName());
         proposal.setRemark(param.getRemark());
+        proposal.setCreatedAt(new Date());
         proposalRepository.save(proposal);
         return proposal;
     }
@@ -45,15 +47,15 @@ public class ProposalServiceImpl implements ProposalService{
     public Proposal createProp(ParamProp param) {
         Proposal proposal=new Proposal();
         proposal.setAuthorName(param.getAuthorName());
-        proposal.setBookName(param.getBookName());
+        proposal.setBookNameProp(param.getBookName());
         proposal.setRemark(param.getRemark());
+        proposal.setCreatedAt(new Date());
         proposalRepository.save(proposal);
         return proposal;
     }
 
     @Override
     public PropPagingDto getAllPropPaging(int pageNumber) {
-
         List<Proposal> proposalList=proposalRepository.findAllBy();
         int numberAllRow=proposalList.size();
         int totalPage=numberAllRow/numberRowPerPage+1;
