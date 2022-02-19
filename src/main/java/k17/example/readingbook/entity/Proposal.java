@@ -23,6 +23,7 @@ public class Proposal {
 
     @Column(name = "book_name")
     private String bookNameProp;
+
     @Column(name = "author_name")
     private String authorName;
 

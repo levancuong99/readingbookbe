@@ -2,7 +2,6 @@ package k17.example.readingbook.service;
 
 import k17.example.readingbook.entity.Book;
 import k17.example.readingbook.entity.Category;
-import k17.example.readingbook.entity.Post;
 import k17.example.readingbook.model.dto.BookDto;
 import k17.example.readingbook.model.dto.BookPagingDto;
 import k17.example.readingbook.model.mapper.BookMapper;
@@ -83,11 +82,14 @@ public class BookServiceImpl implements  BookService{
         BookDto bookDto=new BookDto();
         Book newBook=BookMapper.toBookCreate(param);
         newBook.setNumberView(0);
+        newBook.setNumberLike(0);
         List<Category> categories=categoryRepository.findAllBy();
         for(Category cate :categories) {
             if(newBook.getCateId()== cate.getCateId()) {
                 bookDto = BookMapper.toBookAndCategory(newBook,cate);
                 bookDto.setNumberView(0);
+                bookDto.setNumberLike(0);
+                bookDto.setCreatedAt(new Date());
                 bookRepository.save(newBook);
                 break;
             }
@@ -113,6 +115,44 @@ public class BookServiceImpl implements  BookService{
         Book book=bookRepository.findByBookId(id);
         book.setNumberLike(book.getNumberLike()+1);
         bookRepository.save(book);
+    }
+
+    @Override
+    public BookPagingDto getAllBookNewestPaging(int pageNumber) {
+        List<Book> books=bookRepository.findAllBy();
+        books=books.stream().sorted(( o1,o2) ->o2.getCreatedAt().compareTo(o1.getCreatedAt())).collect(Collectors.toList());
+        List<Category> categories=categoryRepository.findAllBy();
+        List<BookDto> bookDtos=new ArrayList<>();
+        for(Book book : books) {
+            int id=book.getCateId();
+            for(Category cate :categories) {
+                if(id== cate.getCateId()) {
+                    bookDtos.add(BookMapper.toBookAndCategory(book,cate));
+                }
+            }
+        }
+
+        int numberAllRow=books.size();
+        int totalPage=numberAllRow/numberRowPerPage+1;
+        BookPagingDto bookPagingDto=new BookPagingDto();
+        bookPagingDto.setCurrentPage(pageNumber);
+        bookPagingDto.setTotalPage(totalPage);
+        bookPagingDto.setAllRow(numberAllRow);
+        int endIndex=0;
+        int startIndex=(pageNumber-1)*numberRowPerPage;
+        if(startIndex+numberRowPerPage<=numberAllRow) {
+            endIndex=startIndex+numberRowPerPage;
+        }else {
+            endIndex=numberAllRow;
+        }
+
+        List<BookDto> books1=new ArrayList<>();
+        for(int i=startIndex; i<endIndex;i++) {
+            books1.add(bookDtos.get(i));
+        }
+        bookPagingDto.setBooks(books1);
+        bookPagingDto.setNumberRowCurrentpage(numberRowPerPage);
+        return bookPagingDto;
     }
 
     @Override
@@ -147,7 +187,7 @@ public class BookServiceImpl implements  BookService{
             books1.add(bookDtos.get(i));
         }
         bookPagingDto.setBooks(books1);
-        bookPagingDto.setNumberRowCurrentpage(books1.size());
+        bookPagingDto.setNumberRowCurrentpage(numberRowPerPage);
         return bookPagingDto;
     }
 
@@ -184,7 +224,7 @@ public class BookServiceImpl implements  BookService{
             books1.add(bookDtos.get(i));
         }
         bookPagingDto.setBooks(books1);
-        bookPagingDto.setNumberRowCurrentpage(books1.size());
+        bookPagingDto.setNumberRowCurrentpage(numberRowPerPage);
         return bookPagingDto;
     }
 
@@ -221,7 +261,7 @@ public class BookServiceImpl implements  BookService{
             books1.add(bookDtos.get(i));
         }
         bookPagingDto.setBooks(books1);
-        bookPagingDto.setNumberRowCurrentpage(books1.size());
+        bookPagingDto.setNumberRowCurrentpage(numberRowPerPage);
         return bookPagingDto;
     }
 
@@ -231,7 +271,6 @@ public class BookServiceImpl implements  BookService{
         if(string.equals("$")) {
 
             string="";
-            System.out.println("dava:"+string);
         };
 
         List<Book> books=bookRepository.findAllBy();
@@ -273,7 +312,7 @@ public class BookServiceImpl implements  BookService{
             books1.add(bookDtos.get(i));
         }
         bookPagingDto.setBooks(books1);
-        bookPagingDto.setNumberRowCurrentpage(books1.size());
+        bookPagingDto.setNumberRowCurrentpage(numberRowPerPage);
         return bookPagingDto;
     }
 }

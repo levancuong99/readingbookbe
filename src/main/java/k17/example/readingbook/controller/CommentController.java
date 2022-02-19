@@ -4,6 +4,7 @@ import k17.example.readingbook.entity.Comment;
 import k17.example.readingbook.model.dto.BookDto;
 import k17.example.readingbook.model.dto.BookPagingDto;
 import k17.example.readingbook.model.dto.CommentPagingDto;
+import k17.example.readingbook.model.request.ParamComment;
 import k17.example.readingbook.model.request.ParamsCreateBook;
 import k17.example.readingbook.model.request.ParamsCreateComment;
 import k17.example.readingbook.model.request.ParamsUpdateBook;
@@ -30,7 +31,7 @@ public class CommentController
     }
 
     @PostMapping("comments/create")
-    public ResponseEntity<?> createComment(@Validated @RequestBody Comment req) {
+    public ResponseEntity<?> createComment(@Validated @RequestBody ParamComment req) {
         Comment comment = commentService.createComment(req);
         return ResponseEntity.ok(comment);
     }

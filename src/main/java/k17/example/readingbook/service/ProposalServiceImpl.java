@@ -7,9 +7,8 @@ import k17.example.readingbook.repository.ProposalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class ProposalServiceImpl implements ProposalService{
@@ -57,6 +56,12 @@ public class ProposalServiceImpl implements ProposalService{
     @Override
     public PropPagingDto getAllPropPaging(int pageNumber) {
         List<Proposal> proposalList=proposalRepository.findAllBy();
+        proposalList=proposalList.stream().sorted(new Comparator<Proposal>() {
+            @Override
+            public int compare(Proposal o1, Proposal o2) {
+                return o2.getCreatedAt().compareTo(o1.getCreatedAt());
+            }
+        }).collect(Collectors.toList());
         int numberAllRow=proposalList.size();
         int totalPage=numberAllRow/numberRowPerPage+1;
         PropPagingDto propPagingDto=new PropPagingDto();
@@ -76,7 +81,7 @@ public class ProposalServiceImpl implements ProposalService{
             proposals.add(proposalList.get(i));
         }
         propPagingDto.setProposals(proposals);
-        propPagingDto.setNumberRowCurrentpage(proposals.size());
+        propPagingDto.setNumberRowCurrentpage(numberRowPerPage);
         return propPagingDto;
     }
 }

@@ -80,7 +80,7 @@ public class PostServiceImpl implements PostService{
             posts.add(postList.get(i));
         }
         postPagingDto.setPosts(posts);
-        postPagingDto.setNumberRowCurrentpage(posts.size());
+        postPagingDto.setNumberRowCurrentpage(numberRowPerPage);
         return postPagingDto;
     }
 }

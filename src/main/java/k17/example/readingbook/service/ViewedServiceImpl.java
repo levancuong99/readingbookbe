@@ -80,7 +80,7 @@ public class ViewedServiceImpl implements  ViewedService{
             books1.add(bookDtos.get(i));
         }
         bookPagingDto.setBooks(books1);
-        bookPagingDto.setNumberRowCurrentpage(books1.size());
+        bookPagingDto.setNumberRowCurrentpage(numberRowPerPage);
         return bookPagingDto;
     }
 

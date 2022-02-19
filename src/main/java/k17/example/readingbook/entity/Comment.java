@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -21,8 +22,13 @@ public class Comment {
     private Integer commentId;
     @Column(name = "user_id")
     private Integer userId;
+    @Column(name = "img_avt")
+    private String imgAvt;
     @Column(name = "book_id")
     private Integer bookId;
     @Column(name = "content")
     private String content;
+    @Column(name = "created_at")
+    private Date createdAt;
+
 }

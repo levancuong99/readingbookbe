@@ -13,7 +13,6 @@ public class ParamsUpdateBook {
     private String description;
     private String imgBook;
     private String linkBook;
-//    private Integer numberView;
     private String authorName;
     private String authorProfile;
     private Integer cateId;

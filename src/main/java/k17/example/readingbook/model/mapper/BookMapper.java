@@ -32,7 +32,6 @@ public class BookMapper {
         book.setDescription(b.getDescription());
         book.setImgBook(b.getImgBook());
         book.setLinkBook(b.getLinkBook());
-//        book.setNumberView(b.getNumberView());
         book.setAuthorName(b.getAuthorName());
         book.setAuthorProfile(b.getAuthorProfile());
         book.setCateId(b.getCateId());

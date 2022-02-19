@@ -46,6 +46,12 @@ public class BookController
         BookPagingDto bookPagingDto = bookService.getAllBookBestViewerPaging(pageNumber);
         return ResponseEntity.ok(bookPagingDto);
     }
+    @GetMapping(value="books/newest/paging/{pageNumber}")
+    public ResponseEntity<?> getListBookNewestPaging(@PathVariable int pageNumber) {
+        BookPagingDto bookPagingDto = bookService.getAllBookNewestPaging(pageNumber);
+        return ResponseEntity.ok(bookPagingDto);
+    }
+
     @GetMapping(value="books/bestliker/paging/{pageNumber}")
     public ResponseEntity<?> getListBookBestLikerPaging(@PathVariable int pageNumber) {
         BookPagingDto bookPagingDto = bookService.getAllBookBestLikerPaging(pageNumber);
