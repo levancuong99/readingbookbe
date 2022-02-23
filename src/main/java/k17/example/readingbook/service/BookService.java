@@ -19,6 +19,7 @@ public interface BookService {
     void deleteBookById(int id);
     void increaseView(int id);
     void increaseLike(int id);
+    void decreaseLike(int id);
     BookPagingDto getAllBookNewestPaging(int pageNumber);
     BookPagingDto getAllBookPaging(int id);
     BookPagingDto getAllBookBestViewerPaging(int id);

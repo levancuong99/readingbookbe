@@ -85,6 +85,11 @@ public class BookController
         bookService.increaseLike(id);
         return ResponseEntity.ok("increase like success");
     }
+    @PutMapping ("books/decreaselike/{id}")
+    public ResponseEntity<?> decreaseLike(@PathVariable int id) {
+        bookService.decreaseLike(id);
+        return ResponseEntity.ok("decrease like success");
+    }
 
 
 }

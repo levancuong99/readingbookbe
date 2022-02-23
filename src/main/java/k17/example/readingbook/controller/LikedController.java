@@ -27,6 +27,13 @@ public class LikedController
         likedService.addLiked(idUser,bookId);
         return ResponseEntity.ok("success");
     }
+
+    @DeleteMapping(value="/books/liked/delete/{idUser}/{bookId}")
+    public ResponseEntity<?> deleteLiked(@PathVariable int idUser,@PathVariable int bookId) {
+        likedService.deleteLiked(idUser,bookId);
+        return ResponseEntity.ok("success");
+    }
+
     @GetMapping(value="/books/liked/check/{idUser}/{bookId}")
     public ResponseEntity<?> isLiked(@PathVariable int idUser,@PathVariable int bookId) {
         Boolean isLiked = likedService.isLikedByUser(idUser,bookId);

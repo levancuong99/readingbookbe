@@ -86,6 +86,12 @@ public class ViewedServiceImpl implements  ViewedService{
 
     @Override
     public void addViewed(int idUser, int idBook) {
+        List<Viewed> viewedList=viewedRepository.findAllBy();
+        for(Viewed viewed : viewedList) {
+            if(viewed.getUserId()==idUser && viewed.getBookId()==idBook) {
+                return;
+            }
+        }
         Viewed v=new Viewed();
         v.setUserId(idUser);
         v.setBookId(idBook);

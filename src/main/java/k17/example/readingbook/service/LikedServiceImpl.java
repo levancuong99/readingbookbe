@@ -29,7 +29,7 @@ public class LikedServiceImpl implements  LikedService{
     @Autowired
     private LikedRepository likedRepository;
 
-    int numberRowPerPage=3;
+    int numberRowPerPage=6;
     @Override
     public BookPagingDto getAllBookLikedByUser(int userId, int pageNumber) {
         List<Liked> likedList=likedRepository.findAllBy();
@@ -92,6 +92,17 @@ public class LikedServiceImpl implements  LikedService{
         l.setUserId(userId);
         l.setBookId(bookId);
         likedRepository.save(l);
+    }
+
+    @Override
+    public void deleteLiked(int userId, int bookId) {
+        List<Liked> likedList=likedRepository.findAllBy();
+        for(Liked l : likedList) {
+            if(l.getUserId()==userId && l.getBookId()==bookId) {
+                likedRepository.delete(l);
+                break;
+            }
+        }
     }
 
     @Override

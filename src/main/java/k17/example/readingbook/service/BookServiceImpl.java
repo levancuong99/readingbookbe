@@ -118,6 +118,13 @@ public class BookServiceImpl implements  BookService{
     }
 
     @Override
+    public void decreaseLike(int id) {
+        Book book=bookRepository.findByBookId(id);
+        book.setNumberLike(book.getNumberLike()-1);
+        bookRepository.save(book);
+    }
+
+    @Override
     public BookPagingDto getAllBookNewestPaging(int pageNumber) {
         List<Book> books=bookRepository.findAllBy();
         books=books.stream().sorted(( o1,o2) ->o2.getCreatedAt().compareTo(o1.getCreatedAt())).collect(Collectors.toList());

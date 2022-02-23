@@ -9,5 +9,4 @@ import java.util.List;
 @Repository
 public interface LikedRepository extends JpaRepository<Liked,Integer> {
       List<Liked> findAllBy();
-
 }
