@@ -69,9 +69,25 @@ public class CommentServiceImpl implements  CommentService{
         cmt.setBookId(p.getBookId());
         cmt.setUserId(p.getUserId());
         cmt.setContent(p.getContent());
+        cmt.setFullName(user.getFullName());
         cmt.setCreatedAt(new Date());
         cmt.setImgAvt(user.getImg_avt());
         commentRepository.save(cmt);
         return cmt;
+    }
+
+    @Override
+    public Comment updateCommentById(int id, ParamComment paramComment) {
+        Comment comment=commentRepository.findByCommentId(id);
+        comment.setContent(paramComment.getContent());
+        comment.setCreatedAt(new Date());
+        commentRepository.save(comment);
+        return comment;
+    }
+
+    @Override
+    public void deleteCommentByIdUser(int id) {
+        Comment comment=commentRepository.findByCommentId(id);
+        commentRepository.delete(comment);
     }
 }

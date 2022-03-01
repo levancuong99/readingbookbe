@@ -11,4 +11,6 @@ import org.springframework.stereotype.Service;
 public interface CommentService {
     CommentPagingDto getAllComment(int bookId, int pageNumber);
     Comment createComment(ParamComment p);
+    Comment updateCommentById(int id, ParamComment paramComment);
+    void deleteCommentByIdUser(int userId);
 }

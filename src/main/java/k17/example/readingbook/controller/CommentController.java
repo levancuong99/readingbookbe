@@ -35,6 +35,17 @@ public class CommentController
         Comment comment = commentService.createComment(req);
         return ResponseEntity.ok(comment);
     }
+    @DeleteMapping("comments/{id}")
+    public ResponseEntity<?> deleteComment(@PathVariable int id) {
+        commentService.deleteCommentByIdUser(id);
+        return ResponseEntity.ok("delete success");
+    }
+
+    @PutMapping("comments/{id}")
+    public ResponseEntity<?> updateComment(@PathVariable int id,@Validated @RequestBody ParamComment req) {
+        Comment comment = commentService.updateCommentById(id,req);
+        return ResponseEntity.ok(comment);
+    }
 
 
 }

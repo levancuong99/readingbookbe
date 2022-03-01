@@ -26,7 +26,7 @@ public class ViewedServiceImpl implements  ViewedService{
 
     @Autowired
     private ViewedRepository viewedRepository;
-    int numberRowPerPage=1;
+    int numberRowPerPage=6;
 
     @Override
     public BookPagingDto getAllBookViewedByUser(int userId, int pageNumber) {

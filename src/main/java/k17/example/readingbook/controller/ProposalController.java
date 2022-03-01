@@ -30,9 +30,9 @@ public class ProposalController
         return ResponseEntity.ok(proposals);
     }
 
-    @GetMapping(value="props/paging/{pageNumber}")
-    public ResponseEntity<?> getListPropsPaging(@PathVariable int pageNumber) {
-        PropPagingDto propPagingDto = proposalService.getAllPropPaging(pageNumber);
+    @GetMapping(value="props/paging/{userId}/{pageNumber}")
+    public ResponseEntity<?> getListPropsPaging(@PathVariable int userId,@PathVariable int pageNumber) {
+        PropPagingDto propPagingDto = proposalService.getAllPropPaging(userId,pageNumber);
         return ResponseEntity.ok(propPagingDto);
     }
 

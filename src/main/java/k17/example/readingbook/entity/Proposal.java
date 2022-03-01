@@ -32,4 +32,11 @@ public class Proposal {
 
     @Column(name = "created_at")
     private Date createdAt;
+
+    @Column(name = "user_id")
+    private Integer userId;
+
+    @Column(name = "full_name")
+    private String fullName;
+
 }

@@ -1,9 +1,11 @@
 package k17.example.readingbook.service;
 
 import k17.example.readingbook.entity.Proposal;
+import k17.example.readingbook.entity.User;
 import k17.example.readingbook.model.dto.PropPagingDto;
 import k17.example.readingbook.model.request.ParamProp;
 import k17.example.readingbook.repository.ProposalRepository;
+import k17.example.readingbook.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,9 +14,12 @@ import java.util.stream.Collectors;
 
 @Service
 public class ProposalServiceImpl implements ProposalService{
-    int numberRowPerPage=5;
+    int numberRowPerPage=3;
     @Autowired
     private ProposalRepository proposalRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
     public Proposal getPropById(int id) {
@@ -44,7 +49,10 @@ public class ProposalServiceImpl implements ProposalService{
 
     @Override
     public Proposal createProp(ParamProp param) {
+        User user=userRepository.findByUserId(param.getUserId());
         Proposal proposal=new Proposal();
+        proposal.setUserId(param.getUserId());
+        proposal.setFullName(user.getFullName());
         proposal.setAuthorName(param.getAuthorName());
         proposal.setBookNameProp(param.getBookName());
         proposal.setRemark(param.getRemark());
@@ -54,9 +62,9 @@ public class ProposalServiceImpl implements ProposalService{
     }
 
     @Override
-    public PropPagingDto getAllPropPaging(int pageNumber) {
+    public PropPagingDto getAllPropPaging(int userId,int pageNumber) {
         List<Proposal> proposalList=proposalRepository.findAllBy();
-        proposalList=proposalList.stream().sorted(new Comparator<Proposal>() {
+        proposalList=proposalList.stream().filter(t -> t.getUserId()==userId).sorted(new Comparator<Proposal>() {
             @Override
             public int compare(Proposal o1, Proposal o2) {
                 return o2.getCreatedAt().compareTo(o1.getCreatedAt());

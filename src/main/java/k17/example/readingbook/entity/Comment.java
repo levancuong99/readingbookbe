@@ -24,6 +24,8 @@ public class Comment {
     private Integer userId;
     @Column(name = "img_avt")
     private String imgAvt;
+    @Column(name = "full_name")
+    private String fullName;
     @Column(name = "book_id")
     private Integer bookId;
     @Column(name = "content")

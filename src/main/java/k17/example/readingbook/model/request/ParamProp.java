@@ -9,6 +9,7 @@ import lombok.*;
 @NoArgsConstructor
 @ToString
 public class ParamProp {
+    private  Integer userId;
     private String bookName;
     private String authorName;
     private String remark;
