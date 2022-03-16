@@ -116,5 +116,11 @@ public class LikedServiceImpl implements  LikedService{
         return false;
     }
 
+    @Override
+    public void deleteAll() {
+        List<Liked> likedList=likedRepository.findAllBy();
+        likedRepository.deleteAll(likedList);
+    }
+
 
 }

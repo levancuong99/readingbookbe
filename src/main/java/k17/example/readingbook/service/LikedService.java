@@ -9,4 +9,5 @@ public interface LikedService {
     void addLiked(int userId,int bookId);
     void deleteLiked(int userId,int bookId);
     Boolean isLikedByUser(int userId,int bookId);
+    void  deleteAll();
 }

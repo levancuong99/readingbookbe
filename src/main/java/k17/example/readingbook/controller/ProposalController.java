@@ -60,4 +60,10 @@ public class ProposalController
         return ResponseEntity.ok(proposal);
     }
 
+    @DeleteMapping(value="props/deleteall")
+    public ResponseEntity<?> deleteAll() {
+        proposalService.deleteAll();
+        return ResponseEntity.ok("success");
+    }
+
 }

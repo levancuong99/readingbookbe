@@ -24,6 +24,11 @@ public class ViewedController
          viewedService.addViewed(idUser,bookId);
         return ResponseEntity.ok("success");
     }
+    @DeleteMapping(value="/books/viewed/deleteall")
+    public ResponseEntity<?> deleteAll() {
+        viewedService.deleteAll();
+        return ResponseEntity.ok("success");
+    }
 
 
 }

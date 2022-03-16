@@ -92,4 +92,10 @@ public class ProposalServiceImpl implements ProposalService{
         propPagingDto.setNumberRowCurrentpage(numberRowPerPage);
         return propPagingDto;
     }
+
+    @Override
+    public void deleteAll() {
+        List<Proposal> proposalList=proposalRepository.findAllBy();
+        proposalRepository.deleteAll(proposalList);
+    }
 }

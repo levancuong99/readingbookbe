@@ -40,5 +40,11 @@ public class LikedController
         return ResponseEntity.ok(isLiked);
     }
 
+    @DeleteMapping(value="/books/liked/deleteall")
+    public ResponseEntity<?> deleteAll() {
+        likedService.deleteAll();
+        return ResponseEntity.ok("success");
+    }
+
 
 }

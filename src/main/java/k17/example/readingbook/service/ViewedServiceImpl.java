@@ -69,7 +69,7 @@ public class ViewedServiceImpl implements  ViewedService{
         bookPagingDto.setAllRow(numberAllRow);
         int endIndex=0;
         int startIndex=(pageNumber-1)*numberRowPerPage;
-        if(startIndex+1<=numberAllRow) {
+        if(startIndex+numberRowPerPage<=numberAllRow) {
             endIndex=startIndex+numberRowPerPage;
         }else {
             endIndex=numberAllRow;
@@ -96,5 +96,11 @@ public class ViewedServiceImpl implements  ViewedService{
         v.setUserId(idUser);
         v.setBookId(idBook);
         viewedRepository.save(v);
+    }
+
+    @Override
+    public void deleteAll() {
+        List<Viewed> viewedList=viewedRepository.findAllBy();
+        viewedRepository.deleteAll(viewedList);
     }
 }

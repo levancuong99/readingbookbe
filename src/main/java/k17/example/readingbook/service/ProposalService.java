@@ -15,4 +15,5 @@ public interface ProposalService {
     Proposal updatePropById(ParamProp param, int id);
     Proposal createProp(ParamProp param);
     PropPagingDto getAllPropPaging(int userId,int pageNumber);
+    void deleteAll();
 }
