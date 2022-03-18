@@ -1,9 +1,7 @@
 package k17.example.readingbook.service;
 
 import k17.example.readingbook.entity.Post;
-import k17.example.readingbook.entity.Proposal;
 import k17.example.readingbook.model.dto.PostPagingDto;
-import k17.example.readingbook.model.dto.PropPagingDto;
 import k17.example.readingbook.model.mapper.PostMapper;
 import k17.example.readingbook.model.request.ParamUpdatePost;
 import k17.example.readingbook.repository.PostRepository;
@@ -11,8 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class PostServiceImpl implements PostService{
 
@@ -28,6 +29,7 @@ public class PostServiceImpl implements PostService{
     @Override
     public List<Post> getAllPost() {
         List<Post> posts=postRepository.findAllBy();
+        posts=posts.stream().sorted((o1, o2) -> o2.getCreatedAt().compareTo(o1.getCreatedAt())).collect(Collectors.toList());
         return posts;
     }
 
@@ -56,11 +58,12 @@ public class PostServiceImpl implements PostService{
         postRepository.save(post);
         return post;
     }
-    int numberRowPerPage=5;
+    int numberRowPerPage=9;
     @Override
     public PostPagingDto getAllPostPaging(int pageNumber) {
 
         List<Post> postList=postRepository.findAllBy();
+        postList=postList.stream().sorted((o1, o2) -> o2.getCreatedAt().compareTo(o1.getCreatedAt())).collect(Collectors.toList());
         int numberAllRow=postList.size();
         int totalPage=numberAllRow/numberRowPerPage+1;
         PostPagingDto postPagingDto=new PostPagingDto();

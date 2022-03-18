@@ -21,15 +21,12 @@ public class UserMapper {
         userDto.setIsDelete(user.getIsDelete());
         userDto.setCreatedAt(user.getCreatedAt());
         userDto.setUpdatedAt(user.getUpdatedAt());
-
         return userDto;
     }
 
     public static User toCreateUser (ParamCreateUser request) {
         User user = new User();
-//        String img_avt = Url.ACCOUNT_IMAGE;
         user.setFullName(request.getFullName());
-//        String hash = BCrypt.hashpw(request.getUserPassword(), BCrypt.gensalt(12));
         user.setPassword(request.getPassword());
         user.setEmail(request.getEmail());
         user.setGender(request.getGender());
@@ -42,9 +39,7 @@ public class UserMapper {
 
     public static User toRegister (ParamCreateUser request) {
         User user = new User();
-//        String img_avt = Url.ACCOUNT_IMAGE;
         user.setFullName(request.getFullName());
-//        String hash = BCrypt.hashpw(request.getUserPassword(), BCrypt.gensalt(12));
         user.setPassword(request.getPassword());
         user.setEmail(request.getEmail());
         user.setGender(request.getGender());

@@ -37,6 +37,6 @@ public class Proposal {
     private Integer userId;
 
     @Column(name = "full_name")
-    private String fullName;
+    private String fullNameProp;
 
 }

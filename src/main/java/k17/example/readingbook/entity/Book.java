@@ -1,6 +1,7 @@
 package k17.example.readingbook.entity;
 
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -34,8 +35,8 @@ public class Book {
     @Column(name = "profile_author")
     private String authorProfile;
     @Column(name = "created_at")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
-
     @Column(name = "cate_id")
     private Integer cateId;
 }

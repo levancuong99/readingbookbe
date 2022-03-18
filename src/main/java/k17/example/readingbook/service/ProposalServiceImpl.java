@@ -52,7 +52,7 @@ public class ProposalServiceImpl implements ProposalService{
         User user=userRepository.findByUserId(param.getUserId());
         Proposal proposal=new Proposal();
         proposal.setUserId(param.getUserId());
-        proposal.setFullName(user.getFullName());
+        proposal.setFullNameProp(user.getFullName());
         proposal.setAuthorName(param.getAuthorName());
         proposal.setBookNameProp(param.getBookName());
         proposal.setRemark(param.getRemark());

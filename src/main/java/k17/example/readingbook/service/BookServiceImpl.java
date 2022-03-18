@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class BookServiceImpl implements  BookService{
-    private static int numberRowPerPage=6;
+    private static int numberRowPerPage=12;
 
     @Autowired
     private BookRepository bookRepository;
@@ -43,6 +43,7 @@ public class BookServiceImpl implements  BookService{
     public List<BookDto> getAllBook() {
         List<BookDto> bookDtos=new ArrayList<>();
         List<Book> books=bookRepository.findAllBy();
+        books=books.stream().sorted(( o1,o2) ->o2.getCreatedAt().compareTo(o1.getCreatedAt())).collect(Collectors.toList());
         List<Category> categories=categoryRepository.findAllBy();
         for(Book book : books) {
             int id=book.getCateId();
@@ -89,7 +90,7 @@ public class BookServiceImpl implements  BookService{
                 bookDto = BookMapper.toBookAndCategory(newBook,cate);
                 bookDto.setNumberView(0);
                 bookDto.setNumberLike(0);
-                bookDto.setCreatedAt(new Date());
+//                bookDto.setCreatedAt(new Date());
                 bookRepository.save(newBook);
                 break;
             }

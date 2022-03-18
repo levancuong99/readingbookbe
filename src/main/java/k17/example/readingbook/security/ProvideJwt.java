@@ -30,7 +30,13 @@ public class ProvideJwt {
                 .build()
                 .verify(token)
                 .getSubject();
-
         return Integer.parseInt(id);
+    }
+    public String validateToken (String accessToken) {
+        return JWT
+                .require(Algorithm.HMAC512(jwtSecret.getBytes()))
+                .build()
+                .verify(accessToken)
+                .getPayload();
     }
 }

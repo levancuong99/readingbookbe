@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.util.List;
 
 
@@ -70,7 +71,7 @@ public class BookController
     }
 
     @PostMapping("/books/create")
-    public ResponseEntity<?> createBook(@Validated @RequestBody ParamsCreateBook req) {
+    public ResponseEntity<?> createBook(@Validated @RequestBody ParamsCreateBook req) throws ParseException {
         BookDto book = bookService.createBook(req);
         return ResponseEntity.ok(book);
     }

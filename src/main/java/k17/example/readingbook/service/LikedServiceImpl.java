@@ -3,14 +3,12 @@ package k17.example.readingbook.service;
 import k17.example.readingbook.entity.Book;
 import k17.example.readingbook.entity.Category;
 import k17.example.readingbook.entity.Liked;
-import k17.example.readingbook.entity.Viewed;
 import k17.example.readingbook.model.dto.BookDto;
 import k17.example.readingbook.model.dto.BookPagingDto;
 import k17.example.readingbook.model.mapper.BookMapper;
 import k17.example.readingbook.repository.BookRepository;
 import k17.example.readingbook.repository.CategoryRepository;
 import k17.example.readingbook.repository.LikedRepository;
-import k17.example.readingbook.repository.ViewedRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
