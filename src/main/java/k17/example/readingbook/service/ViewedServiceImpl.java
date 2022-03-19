@@ -13,7 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ViewedServiceImpl implements  ViewedService{
@@ -79,6 +82,7 @@ public class ViewedServiceImpl implements  ViewedService{
         for(int i=startIndex; i<endIndex;i++) {
             books1.add(bookDtos.get(i));
         }
+        Collections.reverse(books1);
         bookPagingDto.setBooks(books1);
         bookPagingDto.setNumberRowCurrentpage(numberRowPerPage);
         return bookPagingDto;

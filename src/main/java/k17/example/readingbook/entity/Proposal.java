@@ -39,4 +39,5 @@ public class Proposal {
     @Column(name = "full_name")
     private String fullNameProp;
 
+
 }

@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -79,6 +80,7 @@ public class LikedServiceImpl implements  LikedService{
         for(int i=startIndex; i<endIndex;i++) {
             books1.add(bookDtos.get(i));
         }
+        Collections.reverse(books1);
         bookPagingDto.setBooks(books1);
         bookPagingDto.setNumberRowCurrentpage(numberRowPerPage);
         return bookPagingDto;

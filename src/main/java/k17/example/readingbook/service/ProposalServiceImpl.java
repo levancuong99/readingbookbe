@@ -28,7 +28,12 @@ public class ProposalServiceImpl implements ProposalService{
 
     @Override
     public List<Proposal> getAllProp() {
-        return proposalRepository.findAllBy();
+        return proposalRepository.findAllBy().stream().sorted(new Comparator<Proposal>() {
+            @Override
+            public int compare(Proposal o1, Proposal o2) {
+                return o2.getCreatedAt().compareTo(o1.getCreatedAt());
+            }
+        }).collect(Collectors.toList());
     }
 
     @Override
